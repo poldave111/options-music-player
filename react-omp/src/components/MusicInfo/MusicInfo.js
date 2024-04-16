@@ -13,11 +13,12 @@ const MusicInfo = (props) => {
             mainStyles.push(styles["is-playing"]);
         } 
     
+    console.log(props);
     return (
         <div className={mainStyles.join(" ")}>
             <h4 id="title">{props.title}</h4>
             <div className={styles["progress-container"]} id="progress-container">
-                <div className={styles["progress"]} id="progress" style={{"width": progress}}></div>
+                <div className={styles["progress"]} id="progress" style={{"width": progress}} onClick={() => props.skip()}></div>
             </div>
         </div>
     )

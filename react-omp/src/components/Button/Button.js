@@ -10,7 +10,7 @@ const Button = (props) => {
     }
 
     return (
-        <div className={ classes.join(" ") }>
+        <div className={ classes.join(" ") } onClick={() => props.action()}>
            {props.children}
         </div>
     )
