@@ -7,8 +7,14 @@ const MusicInfo = (props) => {
 
     const progress = useMemo(() => props.progress + "%", [props.progress]);
 
+    const mainStyles = [styles["music-info"]]; 
+
+        if(props.isPlaying) {
+            mainStyles.push(styles["is-playing"]);
+        } 
+    
     return (
-        <div className={styles["music-info"]}>
+        <div className={mainStyles.join(" ")}>
             <h4 id="title">{props.title}</h4>
             <div className={styles["progress-container"]} id="progress-container">
                 <div className={styles["progress"]} id="progress" style={{"width": progress}}></div>

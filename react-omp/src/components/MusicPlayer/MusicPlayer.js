@@ -7,7 +7,7 @@ const MusicPlayer = () => {
     return (
         <div className={styles["music-container"]}>
             <ImageContainer imgPath="images/3.jpg" />
-            <MusicInfo title="test title" progress={50}/>
+            <MusicInfo title="test title" progress={50} isPlaying={true} />
             <Navigation />
         </div>
     )
