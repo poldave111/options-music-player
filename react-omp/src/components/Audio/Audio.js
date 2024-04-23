@@ -1,8 +1,13 @@
 import { useRef, useEffect } from "react";
 
 const Audio = (props) => {
-
+    //const { duration, currentTime } = e.srcElement;
     const audioRef = useRef(); 
+    const handleTimeUpdate = (e) =>  {
+        const { duration, currentTime } = audioRef.current;
+        props.onChange(duration, currentTime);
+        console.log('duration & currentTime', duration, currentTime);
+    };
 
     useEffect(() => {
         if(audioRef.current) {
@@ -15,7 +20,7 @@ const Audio = (props) => {
     }, [props.isPlaying]);
 
     return (
-        <audio ref={audioRef} src={props.src}></audio>
+        <audio onTimeUpdate={handleTimeUpdate} ref={audioRef} src={props.src}></audio>
     )
 }
 
