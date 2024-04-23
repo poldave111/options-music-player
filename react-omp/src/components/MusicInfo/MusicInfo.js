@@ -13,7 +13,6 @@ const MusicInfo = (props) => {
             mainStyles.push(styles["is-playing"]);
         } 
     
-    console.log(props);
     return (
         <div className={mainStyles.join(" ")}>
             <h4 id="title">{props.title}</h4>

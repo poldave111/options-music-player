@@ -1,8 +1,21 @@
-
+import { useRef, useEffect } from "react";
 
 const Audio = (props) => {
+
+    const audioRef = useRef(); 
+
+    useEffect(() => {
+        if(audioRef.current) {
+            if(props.isPlaying) {
+                audioRef.current.play();
+            } else {
+                audioRef.current.pause();
+            }
+        }
+    }, [props.isPlaying]);
+
     return (
-        <audio src={props.src}></audio>
+        <audio ref={audioRef} src={props.src}></audio>
     )
 }
 

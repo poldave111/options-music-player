@@ -3,8 +3,8 @@ import Icon from "../Icon/Icon";
 import styles from "./Navigation.module.scss";
 
 const Navigation = (props) => {
-    
 
+    const actionIcon = props.isPlaying ? "pause" : "play";
 
     return (
         <div className={styles.navigation}>
@@ -12,7 +12,7 @@ const Navigation = (props) => {
                 <Icon name="backward" />
             </Button>
             <Button modifier="big" action={props.togglePlay}>
-                <Icon name="play" />
+                <Icon name={actionIcon} />
             </Button>
             <Button action={props.next}>
                 <Icon name="forward" />
