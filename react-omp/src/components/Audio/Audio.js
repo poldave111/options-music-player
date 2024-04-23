@@ -20,7 +20,7 @@ const Audio = (props) => {
     }, [props.isPlaying]);
 
     return (
-        <audio onTimeUpdate={handleTimeUpdate} ref={audioRef} src={props.src}></audio>
+        <audio onEnded={props.onEnded} onTimeUpdate={handleTimeUpdate} ref={audioRef} src={props.src}></audio>
     )
 }
 

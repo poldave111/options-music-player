@@ -9,6 +9,7 @@ const MusicPlayer = () => {
     const [song, setSong] = useState({"filename": 3, "title": "3"});
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [duration, setDuration] = useState(0);
 
     const prev = () => (console.log("prev"));
     const togglePlay = () => {
@@ -16,18 +17,25 @@ const MusicPlayer = () => {
         console.log("togglePlay");
     };
     const next = () => (console.log("next"));
-    const skip = () => (console.log("skip"));
+    const skip = () => (console.log("skip")); //:toDo - start here! :) 
 
     const updateProgress = (duration, currentTime) => {
         const progressPercent = (currentTime / duration) * 100;
         setProgress(progressPercent);
         //console.log('updateProgres getting an event as an argument', e);
+        setDuration(duration);
+    }
+
+    const onEnded = () => {
+        setIsPlaying(false); 
+        setProgress(0);
+        setDuration(0);
     }
 
     return (
         <div className={styles["music-container"]}>
             <ImageContainer isPlaying={isPlaying} imgPath={`images/${song.filename}.jpg`} />
-            <Audio onChange={updateProgress} isPlaying={isPlaying} src={`music/${song.filename}.mp3`}/>
+            <Audio onChange={updateProgress} onEnded={onEnded} isPlaying={isPlaying} src={`music/${song.filename}.mp3`}/>
             <MusicInfo 
                 title={`${song.title}`} 
                 isPlaying={isPlaying}
