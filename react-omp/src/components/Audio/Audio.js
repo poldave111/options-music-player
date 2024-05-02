@@ -8,6 +8,12 @@ const Audio = (props) => {
         props.onChange(duration, currentTime);
         console.log('duration & currentTime', duration, currentTime);
     };
+    const setDuration = () => {
+        if(audioRef.current) {
+            props.setTime(audioRef.current.duration);
+            console.log('duration', audioRef.current.duration);
+        }
+    };
 
     useEffect(() => {
         if(audioRef.current) {
@@ -19,8 +25,21 @@ const Audio = (props) => {
         }
     }, [props.isPlaying]);
 
+    useEffect(() => {
+        if (audioRef.current && props.currentTime !== audioRef.current.currentTime) {
+            audioRef.current.currentTime = props.duration;
+        }
+    }, [props.duration]);
+
     return (
-        <audio onEnded={props.onEnded} onTimeUpdate={handleTimeUpdate} ref={audioRef} src={props.src}></audio>
+        <audio 
+            onEnded={props.onEnded} 
+            onTimeUpdate={handleTimeUpdate} 
+            ref={audioRef} 
+            src={props.src} 
+            preload="metadata"
+            onLoadedMetadata={setDuration}
+        />
     )
 }
 

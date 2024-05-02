@@ -6,10 +6,11 @@ import Audio from "../Audio/Audio";
 import styles from "./MusicPlayer.module.scss";
 
 const MusicPlayer = () => {
-    const [song, setSong] = useState({"filename": 3, "title": "3"});
+    const [song, setSong] = useState({"filename": 15, "title": "15"});
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
+    const [time, setTime] = useState(0); 
 
     const prev = () => (console.log("prev"));
     const togglePlay = () => {
@@ -17,7 +18,18 @@ const MusicPlayer = () => {
         console.log("togglePlay");
     };
     const next = () => (console.log("next"));
-    const skip = () => (console.log("skip")); //:toDo - start here! :) 
+    const skip = (e) => {
+        const width = e.target.clientWidth;
+        const clickX = e.nativeEvent.offsetX;
+        setProgress((clickX/width) * 100);
+        setDuration((clickX/width) * time);
+        
+        console.log(width);
+        console.log(clickX);
+
+
+
+    }; //:toDo - start here! :) 
 
     const updateProgress = (duration, currentTime) => {
         const progressPercent = (currentTime / duration) * 100;
@@ -35,7 +47,14 @@ const MusicPlayer = () => {
     return (
         <div className={styles["music-container"]}>
             <ImageContainer isPlaying={isPlaying} imgPath={`images/${song.filename}.jpg`} />
-            <Audio onChange={updateProgress} onEnded={onEnded} isPlaying={isPlaying} src={`music/${song.filename}.mp3`}/>
+            <Audio 
+                onChange={updateProgress} 
+                onEnded={onEnded} 
+                isPlaying={isPlaying} 
+                src={`music/${song.filename}.mp3`} 
+                setTime={setTime}
+                duration={duration}
+            />
             <MusicInfo 
                 title={`${song.title}`} 
                 isPlaying={isPlaying}

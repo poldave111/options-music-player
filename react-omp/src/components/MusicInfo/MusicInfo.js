@@ -16,8 +16,8 @@ const MusicInfo = (props) => {
     return (
         <div className={mainStyles.join(" ")}>
             <h4 id="title">{props.title}</h4>
-            <div className={styles["progress-container"]} id="progress-container">
-                <div className={styles["progress"]} id="progress" style={{"width": progress}} onClick={() => props.skip()}></div>
+            <div className={styles["progress-container"]} id="progress-container" onClick={props.skip}>
+                <div className={styles["progress"]} id="progress" style={{"width": progress}}></div> 
             </div>
         </div>
     )
