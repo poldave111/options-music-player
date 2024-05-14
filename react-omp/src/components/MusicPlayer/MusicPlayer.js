@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect} from 'react';
+import { useRef, useState, useEffect, useMemo, useCallback} from 'react';
 import ImageContainer from "../ImageContainer/ImageContainer";
 import Navigation from "../Navigation/Navigation";
 import MusicInfo from "../MusicInfo/MusicInfo";
@@ -14,23 +14,24 @@ const MusicPlayer = () => {
     
     const audioRef = useRef();
 
-    const handleTimeUpdate = (e) =>  {
+    const handleTimeUpdate = useCallback(() =>  {
         //const {currentTime } = audioRef.current;
         setCurrentTime(audioRef.current.currentTime);
         setProgress((currentTime/duration)*100);
-    };
+    },[audioRef.current]);
 
-    const onLoadedMetadata = () => {
-        if(audioRef.current) {
+    const onLoadedMetadata = useCallback(() => {
+        //if(audioRef.current) {
             setDuration(audioRef.current.duration);
-        }
-    };
+        //}
+    },[audioRef.current]);
 
     // useEffect(() => {
-    //     if (audioRef.current && currentTime !== audioRef.current.currentTime) {
-    //         audioRef.current.currentTime = currentTime;
+    //     if (audioRef.current /*&& currentTime !== audioRef.current.currentTime*/) {
+    //         //audioRef.current.currentTime = currentTime;
     //     }
-    // }, [currentTime, audioRef.current]);
+    //     setProgress((currentTime/duration)*100);
+    // }, [currentTime, audioRef.current, duration]);
 
     useEffect(() => {
         if(audioRef.current) {
@@ -52,8 +53,8 @@ const MusicPlayer = () => {
         const width = e.target.clientWidth;
         const clickX = e.nativeEvent.offsetX;
         const ratio = clickX/width;
-        setProgress(ratio * 100);
         setCurrentTime(ratio * duration);
+        setProgress(ratio * 100);
         audioRef.current.currentTime = currentTime;
         console.log(width);
         console.log(clickX);
@@ -68,21 +69,22 @@ const MusicPlayer = () => {
     return (
         <div className={styles["music-container"]}>
             <ImageContainer isPlaying={isPlaying} imgPath={`images/${song.filename}.jpg`} />
-            {/* <Audio 
+            <Audio 
                 onEnded={onEnded} 
                 src={`music/${song.filename}.mp3`} 
                 audioRef={audioRef}
                 handleTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={onLoadedMetadata}
-            /> */}
-            <audio 
+            />
+
+            {/* <audio 
             onEnded={onEnded} 
             onTimeUpdate={handleTimeUpdate} 
             ref={audioRef} // referencja trafia do rodzica bo jest to props z rodzica (czyli MusicPlayer)
             src={`music/${song.filename}.mp3`} 
             preload="metadata"
             onLoadedMetadata={onLoadedMetadata}
-        />
+        /> */}
             <MusicInfo 
                 title={`${song.title}`} 
                 isPlaying={isPlaying}

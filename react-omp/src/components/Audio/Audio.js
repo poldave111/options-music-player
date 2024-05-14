@@ -1,4 +1,6 @@
-const Audio = (props) => {
+import { memo } from "react";
+
+const Audio = memo((props) => {
     //const { duration, currentTime } = e.srcElement;
     //console.log('audioRef', audioRef);
 
@@ -14,6 +16,6 @@ const Audio = (props) => {
             onLoadedMetadata={props.onLoadedMetadata}
         />
     )
-}
+})
 
 export default Audio;
