@@ -12,6 +12,13 @@ const MusicPlayer = ({song, prev, next}) => {
     const [duration, setDuration] = useState(0); // song length
     const audioRef = useRef();
 
+    useEffect(() => {
+        console.log('song has changed to: ', song);
+        if(isPlaying == true) {
+            audioRef.current.play();
+        };
+    },[song]);
+
     const handleTimeUpdate = useCallback(() =>  {
         const { currentTime } = audioRef.current;
         setProgress((currentTime / duration) * 100);

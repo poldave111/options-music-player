@@ -4,7 +4,7 @@ const Audio = (props) => {
     //const { duration, currentTime } = e.srcElement;
     //console.log('audioRef', audioRef);
 
-    console.log(props);
+    console.log('audio props', props);
 
     return (
         <audio 

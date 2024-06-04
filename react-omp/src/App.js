@@ -10,7 +10,7 @@ function App() {
     {"filename": 9, "title": "9"}, 
     {"filename": 12, "title": "12"}
   ];
-  const [musicFile, setMusicFile] = useState(songs[4]);
+  const [musicFile, setMusicFile] = useState(songs[2]);
 
   const prev = () => (setMusicFile(prevValue => {
     // find song index in array songs
